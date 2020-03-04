@@ -1,0 +1,48 @@
+{
+  "name": "@arction/lcjs-headless",
+  "version": "1.0.0",
+  "description": "Node JS support package for LightningChart JS.",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "dependencies": {
+    "canvas": "^2.6.1",
+    "gl": "^4.4.1",
+    "jsdom": "^16.2.0",
+    "@arction/lcjs": ">= 1.2.2"
+  },
+  "devDependencies": {
+    "@types/gl": "^4.1.0",
+    "@types/node": "^13.7.7",
+    "terser": "^4.6.6",
+    "typescript": "^3.8.3"
+  },
+  "scripts": {
+    "tsc": "tsc",
+    "terser": "terser --output dist/index.js --config-file terser.json -- dist/index.js",
+    "build": "npm run tsc && npm run terser",
+    "prepare": "npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@gitlab.com:arction/lcjs/lcjs-headless.git"
+  },
+  "homepage": "https://www.arction.com/lightningchart-js/",
+  "author": "Arction Ltd.",
+  "license": "",
+  "keywords": [
+    "lightningchart",
+    "lightning chart",
+    "headless",
+    "Arction",
+    "typescript",
+    "javascript",
+    "GPU",
+    "visualisation",
+    "data visualisation",
+    "data visualization",
+    "node js"
+  ],
+  "files": [
+    "dist/**/*"
+  ]
+}
