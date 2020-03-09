@@ -25,12 +25,10 @@ interface StackGlResize {
 const orig_getContext = dom.window.HTMLCanvasElement.prototype.getContext
 dom.window.HTMLCanvasElement.prototype.getContext = function () {
     if (arguments[0] === 'webgl') {
+        // create headless-gl GL context
         const ctx: ReturnType<typeof createContext> & Partial<StackGlResize> = createContext(1, 1, arguments[1])
         // insert the resize method to the context so that lcjs package can use it
         ctx.resize = ctx.getExtension('STACKGL_resize_drawingbuffer').resize
-        // store the context in the canvas element itself
-        // otherwise the toDataUrl overwrite wouldn't work as it wouldn't have access to the correct gl context
-        this.ctx = ctx
         return ctx
     } else {
         return orig_getContext.apply(this, arguments)
