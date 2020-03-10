@@ -3,9 +3,11 @@ import { Sharp } from 'sharp'
 import { PNG } from 'pngjs'
 let sharp
 let PNGConstructor
+// try to load "sharp" package
 try {
     sharp = require('sharp')
 } catch (e) { }
+// try to load "pngjs" package
 try {
     PNGConstructor = require('pngjs').PNG
 } catch (e) { }
@@ -78,4 +80,55 @@ export const renderToPNG: FuncRenderTo<PNG> = (chart, width, height, noFlip?): P
     const png = new PNGConstructor({ width, height })
     png.data = buff
     return png
+}
+
+/**
+ * Render chart to a Base 64 encoded PNG.
+ * 
+ * PNG support is provided by "pngjs" package.
+ * 
+ * pngjs is a simple PNG encoder/decoder for Node JS with no dependencies.
+ * 
+ * **The "pngjs" module has to be installed to the host application.**
+ * If the "pngjs" module is missing, an error will be thrown.
+ * 
+ * ```js
+ * const chartOutput = renderToBase64(chart, 1920, 1080)
+ * console.log(chartOutput)
+ * ```
+ * @param chart     Chart to render.
+ * @param width     Rendering resolution width.
+ * @param height    Rendering resolution height.
+ * @param noFlip    Leave the image upside down.
+ */
+export const renderToBase64: FuncRenderTo<string> = (chart, width, height, noFlip?): string => {
+    const png = renderToPNG(chart, width, height, noFlip)
+    const outputBuff = PNGConstructor.sync.write(png)
+    return outputBuff.toString('base64')
+}
+
+/**
+ * Render chart to a data URI format, Base64 encoded PNG.
+ * 
+ * Adds the "data:image/png;base64," prefix Base64 encoded PNG.
+ * 
+ * PNG support is provided by "pngjs" package.
+ * 
+ * pngjs is a simple PNG encoder/decoder for Node JS with no dependencies.
+ * 
+ * **The "pngjs" module has to be installed to the host application.**
+ * If the "pngjs" module is missing, an error will be thrown.
+ * 
+ * ```js
+ * const chartOutput = renderToDataURI(chart, 1920, 1080)
+ * console.log(chartOutput)
+ * ```
+ * @param chart     Chart to render.
+ * @param width     Rendering resolution width.
+ * @param height    Rendering resolution height.
+ * @param noFlip    Leave the image upside down.
+ */
+export const renderToDataURI: FuncRenderTo<string> = (chart, width, height, noFlip?): string => {
+    const outputBuff = renderToBase64(chart, width, height, noFlip)
+    return `data:image/png;base64,${outputBuff}`
 }
