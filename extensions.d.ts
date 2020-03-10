@@ -3,8 +3,5 @@ declare module NodeJS {
     interface Global {
         document: Document
         window: Window
-        atob: Window['atob']
-        Blob: Blob,
-        navigator: Navigator
     }
 }
