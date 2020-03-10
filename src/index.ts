@@ -41,12 +41,6 @@ dom.window.HTMLCanvasElement.prototype.getContext = function () {
 global.document = dom.window.document
 // make "window" exist in the global context
 global.window = dom.window
-// make "atob" exist in the global context
-global.atob = dom.window.atob
-// make "Blob" exist in the global context
-global.Blob = dom.window.Blob
-// make "navigator" exist in the global context
-global.navigator = dom.window.navigator
 
 /**
  * Monkey patch a function from LightningChart interface.

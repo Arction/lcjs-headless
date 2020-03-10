@@ -13,8 +13,14 @@
   "devDependencies": {
     "@types/gl": "^4.1.0",
     "@types/node": "^13.7.7",
+    "@types/pngjs": "^3.4.1",
+    "@types/sharp": "^0.24.0",
     "terser": "^4.6.6",
     "typescript": "^3.8.3"
+  },
+  "optionalDependencies": {
+    "sharp": "^0.25.1",
+    "pngjs": "^3.4.0"
   },
   "scripts": {
     "tsc": "tsc",
