@@ -89,3 +89,4 @@ export {
     lightningChart,
     registerFont
 }
+export * from './helpers'
