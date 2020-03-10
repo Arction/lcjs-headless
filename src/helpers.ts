@@ -73,7 +73,7 @@ export const renderToSharp: FuncRenderTo<Sharp> = (chart, width, height, noFlip?
  */
 export const renderToPNG: FuncRenderTo<PNG> = (chart, width, height, noFlip?): PNG => {
     if (!PNGConstructor) {
-        throw new Error('Module "sharp" not found!')
+        throw new Error('Module "pngjs" not found!')
     }
     const frame = chart.engine.renderFrame(width, height, noFlip)
     const buff = Buffer.from(frame)

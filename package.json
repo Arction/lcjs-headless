@@ -2,8 +2,8 @@
   "name": "@arction/lcjs-headless",
   "version": "1.0.0",
   "description": "Node JS support package for LightningChart JS.",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
   "dependencies": {
     "canvas": "^2.6.1",
     "gl": "^4.4.1",
@@ -24,7 +24,7 @@
   },
   "scripts": {
     "tsc": "tsc",
-    "terser": "terser --output dist/index.js --config-file terser.json -- dist/index.js",
+    "terser": "terser --output ./lib/index.js --config-file terser.json -- ./lib/index.js && terser --output ./lib/helpers.js --config-file terser.json -- ./lib/helpers.js",
     "build": "npm run tsc && npm run terser",
     "prepare": "npm run build"
   },
@@ -49,6 +49,9 @@
     "node js"
   ],
   "files": [
-    "dist/**/*"
+    "lib/helpers.js",
+    "lib/helpers.d.ts",
+    "lib/index.js",
+    "lib/index.d.ts"
   ]
 }
