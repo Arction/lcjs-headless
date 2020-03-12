@@ -49,6 +49,7 @@ export const renderToSharp: FuncRenderTo<Sharp> = (chart, width, height, noFlip?
         }
     })
 }
+
 /**
  * Render chart to a PNG.
  * 
@@ -131,4 +132,23 @@ export const renderToBase64: FuncRenderTo<string> = (chart, width, height, noFli
 export const renderToDataURI: FuncRenderTo<string> = (chart, width, height, noFlip?): string => {
     const outputBuff = renderToBase64(chart, width, height, noFlip)
     return `data:image/png;base64,${outputBuff}`
+}
+
+/**
+ * Render chart to a Buffer.
+ * 
+ * Image data is stored in the buffer as a plain 32 bit RGBA data.
+ * 
+ * ```js
+ * const chartOutput = renderToRGBABuffer(chart, 1920, 1080)
+ * console.log(chartOutput)
+ * ```
+ * @param chart     Chart to render.
+ * @param width     Rendering resolution width.
+ * @param height    Rendering resolution height.
+ * @param noFlip    Leave the image upside down.
+ */
+export const renderToRGBABuffer: FuncRenderTo<Buffer> = (chart, width, height, noFlip?): Buffer => {
+    const uBuffer = chart.engine.renderFrame(width, height, noFlip)
+    return Buffer.from(uBuffer)
 }
