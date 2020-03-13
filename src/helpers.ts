@@ -13,9 +13,13 @@ try {
 } catch (e) { }
 
 /**
- * Function type for all renderTo... helper methods.
+ * Function type for all renderToZZZ helper methods.
  */
 export type FuncRenderTo<T> = (chart: Control, width: number, height: number, noFlip?: boolean) => T
+/**
+ * Function type for all renderToZZZ helper methods.
+ */
+export type FuncRenderToWithPixelRatio<T> = (chart: Control, width: number, height: number, noFlip?: boolean, pixelRatio?: number) => T
 
 /**
  * Render chart to a Sharp object.
@@ -31,23 +35,38 @@ export type FuncRenderTo<T> = (chart: Control, width: number, height: number, no
  *  .toFile('chartOutput.webp')
  * ```
  * 
- * @param chart     Chart to render.
- * @param width     Rendering resolution width.
- * @param height    Rendering resolution height.
- * @param noFlip    Leave the image upside down.
+ * Example for using the `pixelRatio` option:
+ * ```js
+ * const pixelRatio = 3
+ * // render the chart with higher pixel ratio for higher quality image.
+ * const chart = lightningChart().ChartXY({ devicePixelRatio: pixelRatio })
+ * // supply pixel ratio so that the `renderToSharp` method knows to downsample the image correctly
+ * // chart is rendered at 5760x3240 resolution and then downsampled to 1920x1080
+ * renderToSharp(chart, 1920, 1080, false, pixelRatio)
+ *  .toFile('chartOutput.webp')
+ * ```
+ * 
+ * @param chart         Chart to render.
+ * @param width         Rendering resolution width.
+ * @param height        Rendering resolution height.
+ * @param noFlip        Leave the image upside down.
+ * @param pixelRatio    Pixel ratio, assume that the chart was rendered with this as the `devicePixelRatio`. 
+ *                      Downsample the frame back to the defined resolution.
  */
-export const renderToSharp: FuncRenderTo<Sharp> = (chart, width, height, noFlip?): Sharp => {
+export const renderToSharp: FuncRenderToWithPixelRatio<Sharp> = (chart, width, height, noFlip?, pixelRatio?): Sharp => {
     if (!sharp) {
         throw new Error('Module "sharp" not found!')
     }
+    const ratio = pixelRatio || 1
     const frame = chart.engine.renderFrame(width, height, noFlip)
-    return sharp(Buffer.from(frame), {
+    const s = sharp(Buffer.from(frame), {
         raw: {
             channels: 4,
-            width,
-            height
+            width: width * ratio,
+            height: height * ratio
         }
     })
+    return ratio !== 1 ? s.resize(width, height) : s
 }
 
 /**
