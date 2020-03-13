@@ -87,7 +87,7 @@ Anti-aliasing that is normally available in browsers is not available when using
 
 The `devicePixelRatio` option when creating a chart can be used to render the chart with higher resolution while scaling all elements so that when the image is downsampled to the target resolution it's displayed correctly but with the benefits of using higher resolution. Rendering at higher resolution is more work so the rendering is slower.
 
-``js
+```js
 import { lightningChart, renderToSharp } from '@arction/lcjs-headless'
 
 const lc = lightningChart()
@@ -96,7 +96,7 @@ const chart = lc.ChartXY({ devicePixelRatio: 3 })
 
 renderToSharp(chart, 1920, 1080, false, 3)
     .toFile('out.png')
-````
+```
 
 Only the `renderToSharp` helper has a built in scaling to downsample the image.
 Other helpers or using the `chart.engine.renderFrame` method do not have built in scaling, instead these APIs will return the image at a resolution that is multiplied by the devicePixelRatio.
