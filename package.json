@@ -16,6 +16,7 @@
     "@types/pngjs": "^3.4.1",
     "@types/sharp": "^0.24.0",
     "terser": "^4.6.6",
+    "typedoc": "^0.16.11",
     "typescript": "^3.8.3"
   },
   "optionalDependencies": {
@@ -26,7 +27,8 @@
     "tsc": "tsc",
     "terser": "terser --output ./lib/index.js --config-file terser.json -- ./lib/index.js && terser --output ./lib/helpers.js --config-file terser.json -- ./lib/helpers.js",
     "build": "npm run tsc && npm run terser",
-    "prepare": "npm run build"
+    "prepare": "npm run build",
+    "docs": "typedoc --out docs --excludeNotExported"
   },
   "repository": {
     "type": "git",
