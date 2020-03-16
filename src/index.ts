@@ -35,13 +35,6 @@ dom.window.HTMLCanvasElement.prototype.getContext = function () {
     }
 }
 
-// ensure that needed global methods and objects exist
-
-// make "document" exist in the global context
-global.document = dom.window.document
-// make "window" exist in the global context
-global.window = dom.window
-
 /**
  * Monkey patch a function from LightningChart interface.
  * Inserts the default parameters that are different from browser environment.
@@ -68,7 +61,14 @@ const monkeyPatchLightningChartInterfaceFunction = (func) => {
     }
 }
 
+// set the JSDOM window to a global variable
+// lcjs package will take this reference to use window APIs
+(global as any)._lcjs = dom.window
+
 import { lightningChart as originalLc, LightningChart } from '@arction/lcjs'
+
+// delete the window reference from global context as lcjs has taken a reference to it now.
+delete (global as any)._lcjs
 
 // monkey patch the lightningChart function,
 // so that its possible to edit the default parameters without actually editing lcjs
