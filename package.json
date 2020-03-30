@@ -27,7 +27,7 @@
     "tsc": "tsc",
     "terser": "terser --output ./lib/index.js --config-file terser.json -- ./lib/index.js && terser --output ./lib/helpers.js --config-file terser.json -- ./lib/helpers.js",
     "build": "npm run tsc && npm run terser",
-    "prepare": "npm run build",
+    "prepublishOnly": "npm run build",
     "docs": "typedoc --out docs --excludeNotExported"
   },
   "repository": {
