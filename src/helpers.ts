@@ -49,9 +49,10 @@ export type FuncRenderToWithPixelRatio<T> = (chart: Control, width: number, heig
  * @param chart         Chart to render.
  * @param width         Rendering resolution width.
  * @param height        Rendering resolution height.
- * @param noFlip        Leave the image upside down.
+ * @param noFlip        Leave the image upside down. Default behavior is to flip the image so that the image is not upside down.
  * @param pixelRatio    Pixel ratio, assume that the chart was rendered with this as the `devicePixelRatio`. 
  *                      Downsample the frame back to the defined resolution.
+ *                      By default no downsampling is done.
  */
 export const renderToSharp: FuncRenderToWithPixelRatio<Sharp> = (chart, width, height, noFlip?, pixelRatio?): Sharp => {
     if (!sharp) {
@@ -119,7 +120,7 @@ export const renderToPNG: FuncRenderTo<PNG> = (chart, width, height, noFlip?): P
  * @param chart     Chart to render.
  * @param width     Rendering resolution width.
  * @param height    Rendering resolution height.
- * @param noFlip    Leave the image upside down.
+ * @param noFlip        Leave the image upside down. Default behavior is to flip the image so that the image is not upside down.
  */
 export const renderToBase64: FuncRenderTo<string> = (chart, width, height, noFlip?): string => {
     const png = renderToPNG(chart, width, height, noFlip)
@@ -146,7 +147,7 @@ export const renderToBase64: FuncRenderTo<string> = (chart, width, height, noFli
  * @param chart     Chart to render.
  * @param width     Rendering resolution width.
  * @param height    Rendering resolution height.
- * @param noFlip    Leave the image upside down.
+ * @param noFlip        Leave the image upside down. Default behavior is to flip the image so that the image is not upside down.
  */
 export const renderToDataURI: FuncRenderTo<string> = (chart, width, height, noFlip?): string => {
     const outputBuff = renderToBase64(chart, width, height, noFlip)
@@ -165,7 +166,7 @@ export const renderToDataURI: FuncRenderTo<string> = (chart, width, height, noFl
  * @param chart     Chart to render.
  * @param width     Rendering resolution width.
  * @param height    Rendering resolution height.
- * @param noFlip    Leave the image upside down.
+ * @param noFlip        Leave the image upside down. Default behavior is to flip the image so that the image is not upside down.
  */
 export const renderToRGBABuffer: FuncRenderTo<Buffer> = (chart, width, height, noFlip?): Buffer => {
     const uBuffer = chart.engine.renderFrame(width, height, noFlip)

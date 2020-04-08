@@ -91,10 +91,12 @@ The `devicePixelRatio` option when creating a chart can be used to render the ch
 ```js
 import { lightningChart, renderToSharp } from '@arction/lcjs-headless'
 
+// Create a chart
 const lc = lightningChart()
-
+// Create the chart with a devicePixelRatio 3 to render at higher resolution for downsampling
 const chart = lc.ChartXY({ devicePixelRatio: 3 })
-
+// render the chart to a sharp object
+// the renderToSharp has built in support for downsampling by providing the pixelRatio as the fourth parameter
 renderToSharp(chart, 1920, 1080, false, 3)
     .toFile('out.png')
 ```

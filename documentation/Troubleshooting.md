@@ -1,4 +1,4 @@
-## Fontconfig error: Cannot load default config file
+## `Fontconfig error: Cannot load default config file`
 
 Make sure to install `fontconfig` package.
 
