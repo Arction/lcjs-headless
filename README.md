@@ -5,16 +5,16 @@ Node JS support package for LightningChart JS.
 This package uses [JSDOM][jsdom], [node-canvas][node-canvas] and [headless-gl][gl] to bring the [LightningChart JS][lcjs] to Node JS.
 
 - [System Dependencies](#system-dependencies)
-    - [Linux](#linux)
-    - [Windows](#windows)
+  - [Linux](#linux)
+  - [Windows](#windows)
 - [Getting Started](#getting-started)
-    - [Headless in Linux machine](#headless-in-linux-machine)
+  - [Headless in Linux machine](#headless-in-linux-machine)
 - [Using Helpers](#using-helpers)
-    - [`renderToSharp`](#rendertosharp)
-    - [`renderToPNG`](#rendertopng)
-    - [`renderToBase64`](#rendertobase64)
-    - [`renderToDataURI`](#rendertodatauri)
-    - [`renderToRGBABuffer`](#rendertorgbabuffer)
+  - [`renderToSharp`](#rendertosharp)
+  - [`renderToPNG`](#rendertopng)
+  - [`renderToBase64`](#rendertobase64)
+  - [`renderToDataURI`](#rendertodatauri)
+  - [`renderToRGBABuffer`](#rendertorgbabuffer)
 - [Font support](#font-support)
 - [Anti-aliasing](#anti-aliasing)
 - [Troubleshooting](#troubleshooting)
@@ -201,7 +201,6 @@ Make sure to install `fontconfig` package.
 ### Specified font is not used
 
 If the font is not a system font, you will need to register the font file with `registerFont` function.
-
 
 [lcjs]: https://www.arction.com/lightningchart-js/
 [gl]: https://github.com/stackgl/headless-gl
