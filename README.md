@@ -19,15 +19,15 @@ This package uses [JSDOM][jsdom], [node-canvas][node-canvas] and [headless-gl][g
 - [Anti-aliasing](#anti-aliasing)
 - [Troubleshooting](#troubleshooting)
 
-### System dependencies
+## System dependencies
 
 [`node-gyp`](node-gyp) is required on some platforms. See the documentation for [node-gyp](node-gyp) for installation instructions.
 
-#### Linux
+### Linux
 
 Only Ubuntu is currently officially supported. `@arction/lcjs-headless` most likely works on other distributions but might require extra work.
 
-##### Ubuntu
+#### Ubuntu
 
 Requirements:
 
@@ -42,7 +42,7 @@ Requirements:
 
 See [headless-gl system dependencies][gl-dependencies] for more details.
 
-#### Windows
+### Windows
 
 - [Python 2.7][python2.7]
 - [Microsoft Visual Studio][vs]
