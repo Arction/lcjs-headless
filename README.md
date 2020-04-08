@@ -10,11 +10,11 @@ This package uses [JSDOM][jsdom], [node-canvas][node-canvas] and [headless-gl][g
 - [Getting Started](#getting-started)
     - [Headless in Linux machine](#headless-in-linux-machine)
 - [Using Helpers](#using-helpers)
-    - `renderToSharp`
-    - `renderToPNG`
-    - `renderToBase64`
-    - `renderToDataURI`
-    - `renderToRGBABuffer`
+    - [`renderToSharp`](#rendertosharp)
+    - [`renderToPNG`](#rendertopng)
+    - [`renderToBase64`](#rendertobase64)
+    - [`renderToDataURI`](#rendertodatauri)
+    - [`renderToRGBABuffer`](#rendertorgbabuffer)
 - [Font support](#font-support)
 - [Anti-aliasing](#anti-aliasing)
 - [Troubleshooting](#troubleshooting)
