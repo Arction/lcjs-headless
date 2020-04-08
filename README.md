@@ -51,9 +51,7 @@ See [headless-gl system dependencies][gl-dependencies] for more details.
 
 Install both `@arction/lcjs-headless` and `@arction/lcjs` from npm.
 
-```bash
-npm install @arction/lcjs-headless @arction/lcjs
-```
+`npm install @arction/lcjs-headless @arction/lcjs`
 
 When creating a new chart make sure to import the `lightningChart()` function from `@arction/lcjs-headless` instead of `@arction/lcjs`. Other LightningChart JS related imports can be imported from `@arction/lcjs`.
 
