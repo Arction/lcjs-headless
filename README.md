@@ -4,12 +4,103 @@ Node JS support package for LightningChart JS.
 
 This package uses [JSDOM][jsdom], [node-canvas][node-canvas] and [headless-gl][gl] to bring the [LightningChart JS][lcjs] to Node JS.
 
+- [System Dependencies](#system-dependencies)
+    - [Linux](#linux)
+    - [Windows](#windows)
+- [Getting Started](#getting-started)
+    - [Headless in Linux machine](#headless-in-linux-machine)
+- [Using Helpers](#using-helpers)
+    - `renderToSharp`
+    - `renderToPNG`
+    - `renderToBase64`
+    - `renderToDataURI`
+    - `renderToRGBABuffer`
+- [Font support](#font-support)
+- [Anti-aliasing](#anti-aliasing)
+- [Troubleshooting](#troubleshooting)
+
+### System dependencies
+
+[`node-gyp`](node-gyp) is required on some platforms. See the documentation for [node-gyp](node-gyp) for installation instructions.
+
+#### Linux
+
+Only Ubuntu is currently officially supported. `@arction/lcjs-headless` most likely works on other distributions but might require extra work.
+
+##### Ubuntu
+
+Requirements:
+
+- [Python 2.7][python2.7]
+- GNU C++ environment (`build-essential` package from `apt`)
+- [libxi-dev][libxi]
+- OpenGl driver ([Mesa 3D][mesa])
+- [Glew][glew]
+- [pkg-config][pkg-config]
+
+`$ sudo apt-get install -y build-essential libxi-dev libglu1-mesa-dev libglew-dev pkg-config`
+
+See [headless-gl system dependencies][gl-dependencies] for more details.
+
+#### Windows
+
+- [Python 2.7][python2.7]
+- [Microsoft Visual Studio][vs]
+
 ## Getting Started
 
-Start by installing both `@arction/lcjs-headless` and `@arction/lcjs`.
+Install both `@arction/lcjs-headless` and `@arction/lcjs` from npm.
 
-Import `lightningChart` function from this package instead of `@arction/lcjs` package.
-Otherwise the use of Lightning Chart is same as with the web version. Few notable differences are that animations are disabled by default and to get image output you will need to call `chart.engine.renderFrame(width, height)`. This method will return you UInt8Array that contains the frame.
+```bash
+npm install @arction/lcjs-headless @arction/lcjs
+```
+
+When creating a new chart make sure to import the `lightningChart()` function from `@arction/lcjs-headless` instead of `@arction/lcjs`. Other LightningChart JS related imports can be imported from `@arction/lcjs`.
+
+To render a chart to a buffer, call `chart.engine.renderFrame(width, height)`. This function will provide you a buffer containing a single image.
+
+```js
+import { lightningChart } from '@arction/lcjs-headless'
+
+const lc = lightningChart()
+const chart = lc.ChartXY()
+
+chart.engine.renderFrame(1280, 720)
+```
+
+The `@arction/lcjs-headless` package provides a couple of helper functions to make the use of LightningChart JS in Node JS environment easier. You can render an image directly to a `sharp` or `pngjs` objects with `renderToSharp` and `renderToPNG` helper functions.
+
+```js
+import { lightningChart, renderToSharp } from '@arction/lcjs-headless'
+
+const lc = lightningChart()
+const chart = lc.ChartXY()
+
+renderToSharp(chart, 1920, 1080).toFile('out.png')
+```
+
+```js
+const fs = require('fs')
+const { PNG } = require('pngjs')
+const { lightningChart, renderToPNG } = require('@arction/lcjs-headless')
+
+const lc = lightningChart()
+const chart = lc.ChartXY()
+
+const chartOutput = renderToPNG(chart, 1920, 1080)
+const outputBuff = PNG.sync.write(chartOutput)
+fs.writeFileSync('./chartOutput.png', outputBuff)
+```
+
+### Headless in Linux machine
+
+When running lcjs-headless in a Linux environment that doesn't provide a X11 or OpenGL environment you will need two more packages to make the environment ready for lcjs-headless.
+
+1. [Xvfb][xvfb]
+
+2. [Mesa][mesa]
+
+`xvfb-run -s "-ac -screen 0 1280x720x24" <node program>`
 
 ## Using helpers
 
@@ -17,9 +108,9 @@ There is a few helper methods available that are exported by this package.
 
 ### `renderToSharp`
 
-* Requires `sharp` package to be installed. [https://sharp.pixelplumbing.com/][sharp]
-    * Also install `@types/sharp` if you are using TypeScript
-* Prepares the frame to a "sharp" object, which allows the use of `sharp` to manipulate the image further or export it to a many different image formats.
+- Requires `sharp` package to be installed. [https://sharp.pixelplumbing.com/][sharp]
+  - Also install `@types/sharp` if you are using TypeScript
+- Prepares the frame to a "sharp" object, which allows the use of `sharp` to manipulate the image further or export it to a many different image formats.
 
 ```js
 import { lightningChart, renderToSharp } from '@arction/lcjs-headless'
@@ -28,15 +119,15 @@ const lc = lightningChart()
 
 const chart = lc.ChartXY()
 
-renderToSharp(chart, 1920, 1080)
-    .toFile('out.png')
+renderToSharp(chart, 1920, 1080).toFile('out.png')
 ```
 
 ### `renderToPNG`
 
-* Requires `pngjs` package to be installed. [https://github.com/lukeapage/pngjs][pngjs]
-    * Also install `@types/pngjs` if you are using TypeScript.
-* Prepares the frame to a PNG image which can then be written to disk.
+- Requires `pngjs` package to be installed. [https://github.com/lukeapage/pngjs][pngjs]
+  - Also install `@types/pngjs` if you are using TypeScript.
+- Prepares the frame to a PNG image which can then be written to disk.
+
 ```js
 const fs = require('fs')
 const { PNG } = require('pngjs')
@@ -47,19 +138,19 @@ fs.writeFileSync('./chartOutput.png', outputBuff)
 
 ### `renderToBase64`
 
-* Requires `pngjs` package to be installed. [https://github.com/lukeapage/pngjs][pngjs]
-    * Also install `@types/pngjs` if you are using TypeScript.
-* Uses the `pngjs` package to encode the raw RGBA data to a PNG and then encodes the buffer to a base 64 string.
+- Requires `pngjs` package to be installed. [https://github.com/lukeapage/pngjs][pngjs]
+  - Also install `@types/pngjs` if you are using TypeScript.
+- Uses the `pngjs` package to encode the raw RGBA data to a PNG and then encodes the buffer to a base 64 string.
 
 ### `renderToDataURI`
 
-* Requires `pngjs` package to be installed. [https://github.com/lukeapage/pngjs][pngjs]
-    * Also install `@types/pngjs` if you are using TypeScript.
-* Uses the `pngjs` package to encode the raw RGBA data to a PNG and then encodes the buffer to a base 64 string and adds the required data uri string.
+- Requires `pngjs` package to be installed. [https://github.com/lukeapage/pngjs][pngjs]
+  - Also install `@types/pngjs` if you are using TypeScript.
+- Uses the `pngjs` package to encode the raw RGBA data to a PNG and then encodes the buffer to a base 64 string and adds the required data uri string.
 
 ### `renderToRGBABuffer`
 
-* Creates a raw Node JS buffer from the UInt8Array that is returned by the `chart.engine.renderFrame`.
+- Creates a raw Node JS buffer from the UInt8Array that is returned by the `chart.engine.renderFrame`.
 
 ## Font support
 
@@ -73,13 +164,13 @@ This function is re-exported by this package from the `node-canvas` package.
 ```js
 import { lightningChart, registerFont } from '@arction/lcjs-headless'
 // Register Open Sans font from a font file
-registerFont('OpenSans-Regular.ttf',{ family: 'Open Sans' })
+registerFont('OpenSans-Regular.ttf', { family: 'Open Sans' })
 
 // Create a chart
 const lc = lightningChart()
 const chart = lc.ChartXY()
 // Use the registered font
-chart.setTitleFont(f=>f.setFamily('Open Sans'))
+chart.setTitleFont((f) => f.setFamily('Open Sans'))
 ```
 
 ## Anti-aliasing
@@ -97,12 +188,22 @@ const lc = lightningChart()
 const chart = lc.ChartXY({ devicePixelRatio: 3 })
 // render the chart to a sharp object
 // the renderToSharp has built in support for downsampling by providing the pixelRatio as the fourth parameter
-renderToSharp(chart, 1920, 1080, false, 3)
-    .toFile('out.png')
+renderToSharp(chart, 1920, 1080, false, 3).toFile('out.png')
 ```
 
 Only the `renderToSharp` helper has a built in scaling to downsample the image.
 Other helpers or using the `chart.engine.renderFrame` method do not have built in scaling, instead these APIs will return the image at a resolution that is multiplied by the devicePixelRatio.
+
+## Troubleshooting
+
+### `Fontconfig error: Cannot load default config file`
+
+Make sure to install `fontconfig` package.
+
+### Specified font is not used
+
+If the font is not a system font, you will need to register the font file with `registerFont` function.
+
 
 [lcjs]: https://www.arction.com/lightningchart-js/
 [gl]: https://github.com/stackgl/headless-gl
@@ -110,3 +211,12 @@ Other helpers or using the `chart.engine.renderFrame` method do not have built i
 [node-canvas]: https://github.com/Automattic/node-canvas
 [sharp]: https://sharp.pixelplumbing.com/
 [pngjs]: https://github.com/lukeapage/pngjs
+[mesa]: https://www.mesa3d.org/intro.html
+[xvfb]: https://en.wikipedia.org/wiki/Xvfb
+[node-gyp]: https://github.com/nodejs/node-gyp
+[python2.7]: https://www.python.org/
+[libxi]: https://www.x.org/wiki/
+[glew]: http://glew.sourceforge.net/
+[pkg-config]: https://www.freedesktop.org/wiki/Software/pkg-config/
+[vs]: https://visualstudio.microsoft.com/
+[gl-dependencies]: https://github.com/stackgl/headless-gl#system-dependencies

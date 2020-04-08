@@ -26,8 +26,6 @@ See [headless-gl system dependencies](https://github.com/stackgl/headless-gl#sys
 - [Python 2.7](python2.7)
 - [Microsoft Visual Studio](vs)
 
-## Browser
-
 [node-gyp]: https://github.com/nodejs/node-gyp
 [python2.7]: https://www.python.org/
 [libxi]: https://www.x.org/wiki/
