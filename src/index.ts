@@ -4,9 +4,13 @@ import { JSDOM } from 'jsdom'
 import { registerFont } from 'canvas'
 // headless-gl that implements WebGL in Node
 import createContext from 'gl'
+import { polyfill as rafPolyfill } from 'raf'
 
 // create a virtual dom
 const dom = new JSDOM(``, { pretendToBeVisual: false })
+
+// polyfill requestAnimationFrame to prevent the chart from throwing an error
+rafPolyfill(dom.window);
 
 /**
  * Headless gl resize interface definition
