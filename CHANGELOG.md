@@ -7,8 +7,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased] - yyyy-mm-dd
 ### Added
 
-- Initial release
-
 ### Changed
 
 ### Deprecated
@@ -16,3 +14,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 ### Security
+
+## [1.1.0] - 2020-12-01
+### Added
+
+- Support for LightningChart JS 2.1.0+
+
+## [1.0.0] - 2020-04-28
+### Added
+
+- Initial release
