@@ -8,6 +8,7 @@ This package uses [JSDOM][jsdom], [node-canvas][node-canvas] and [headless-gl][g
   - [Linux](#linux)
   - [Windows](#windows)
 - [Getting Started](#getting-started)
+  - [Local Resources](#local-resources)
   - [Headless in Linux machine](#headless-in-linux-machine)
 - [Using Helpers](#using-helpers)
   - [`renderToSharp`](#rendertosharp)
@@ -88,6 +89,16 @@ const chart = lc.ChartXY()
 const chartOutput = renderToPNG(chart, 1920, 1080)
 const outputBuff = PNG.sync.write(chartOutput)
 fs.writeFileSync('./chartOutput.png', outputBuff)
+```
+
+### Local Resources
+
+When using Map Chart with in Node JS you need to provide the path to the LCJS resource files. To do this provide `resourcesBaseUrl` with `fs:` prefix.
+
+```js
+const lcjs = lightningChart({
+    resourcesBaseUrl: `fs:${path.resolve(__dirname, 'node_modules', '@arction', 'lcjs', 'dist', 'resources')}`
+})
 ```
 
 ### Headless in Linux machine
