@@ -1,7 +1,7 @@
 // provides a virtual dom for lcjs to use
 import { JSDOM } from 'jsdom'
 // font support
-import { registerFont } from 'canvas'
+import { createCanvas, registerFont, Image } from 'canvas'
 // headless-gl that implements WebGL in Node
 import createContext from 'gl'
 import { polyfill as rafPolyfill } from 'raf'
@@ -79,6 +79,10 @@ dom.window.fetch = function () {
 
 // suppress alert
 dom.window.alert = function () { }
+
+dom.window.Image = Image
+
+dom.window.lcjs_setup = createCanvas
 
 /**
  * Monkey patch a function from LightningChart interface.
