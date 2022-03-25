@@ -135,6 +135,8 @@ const chart = lc.ChartXY()
 renderToSharp(chart, 1920, 1080).toFile('out.png')
 ```
 
+> Note: There is a known issue with using `sharp` on Windows. https://sharp.pixelplumbing.com/install#canvas-and-windows
+
 ### `renderToPNG`
 
 - Requires `pngjs` package to be installed. [https://github.com/lukeapage/pngjs][pngjs]
