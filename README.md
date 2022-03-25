@@ -48,6 +48,10 @@ See [headless-gl system dependencies][gl-dependencies] for more details.
 - [Python 2.7][python2.7]
 - [Microsoft Visual Studio][vs]
 
+### macOS
+
+- [Xcode][xcode] or [Xcode Command Line Tools][xcode-command-line-tools]
+
 ## Getting Started
 
 Install both `@arction/lcjs-headless` and `@arction/lcjs` from npm.
@@ -228,3 +232,5 @@ If the font is not a system font, you will need to register the font file with `
 [pkg-config]: https://www.freedesktop.org/wiki/Software/pkg-config/
 [vs]: https://visualstudio.microsoft.com/
 [gl-dependencies]: https://github.com/stackgl/headless-gl#system-dependencies
+[xcode]: https://developer.apple.com/xcode/
+[xcode-command-line-tools]: https://mac.install.guide/commandlinetools/index.html
