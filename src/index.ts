@@ -102,7 +102,8 @@ const monkeyPatchLightningChartInterfaceFunction = (func) => {
         // the original user given arguments take priority over the new defaults
         args[0] = Object.assign({}, {
             maxFps: -1,
-            disableAnimations: true
+            disableAnimations: true,
+            interactable: false,
         }, args[0])
 
         // call the original function with modified arguments
