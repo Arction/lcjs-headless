@@ -6,25 +6,25 @@
   "types": "lib/index.d.ts",
   "dependencies": {
     "@types/pngjs": "^6.0.1",
-    "@types/sharp": "^0.28.4",
-    "canvas": "^2.8.0",
-    "gl": "^4.9.0",
-    "jsdom": "^16.6.0",
+    "@types/sharp": "^0.31.1",
+    "canvas": "^2.11.0",
+    "gl": "^6.0.2",
+    "jsdom": "^20.0.3",
     "raf": "^3.4.1"
   },
   "peerDependencies": {
-    "@arction/lcjs": ">= 3.3.0 < 4"
+    "@arction/lcjs": ">= 4 < 5"
   },
   "devDependencies": {
-    "@arction/lcjs": "^3.3.0",
-    "@types/gl": "^4.1.0",
-    "@types/node": "^13.13.0",
-    "typedoc": "^0.21.4",
-    "typescript": "^4.3.5"
+    "@arction/lcjs": "^4.0.0",
+    "@types/gl": "^6.0.2",
+    "@types/node": "^18.11.18",
+    "typedoc": "^0.23.23",
+    "typescript": "^4.9.4"
   },
   "optionalDependencies": {
-    "sharp": "^0.28.3",
-    "pngjs": "^6.0.0"
+    "pngjs": "^6.0.0",
+    "sharp": "^0.31.3"
   },
   "scripts": {
     "tsc": "tsc",
