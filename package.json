@@ -13,10 +13,10 @@
     "raf": "^3.4.1"
   },
   "peerDependencies": {
-    "@arction/lcjs": ">= 3.3.0 < 4"
+    "@arction/lcjs": ">= 4 < 5"
   },
   "devDependencies": {
-    "@arction/lcjs": "^3.3.0",
+    "@arction/lcjs": "^4.0.0",
     "@types/gl": "^6.0.2",
     "@types/node": "^18.11.18",
     "typedoc": "^0.23.23",
