@@ -15,6 +15,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Security
 
+## [1.6.0] - 2023-02-07
+### Added
+
+- Support for LightningChart JS 4.0.0+.
+
 ## [1.5.0] - 2021-12-01
 ### Added
 
