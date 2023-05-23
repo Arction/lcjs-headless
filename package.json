@@ -16,7 +16,7 @@
     "@arction/lcjs": ">= 4 < 5"
   },
   "devDependencies": {
-    "@arction/lcjs": "^4.0.0",
+    "@arction/lcjs": "^4.1.0",
     "@types/gl": "^6.0.2",
     "@types/node": "^18.11.18",
     "typedoc": "^0.23.23",
