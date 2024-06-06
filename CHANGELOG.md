@@ -15,6 +15,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Security
 
+## [2.0.0] - 2024-06-06
+
+### Added
+
+- Support for LightningChart JS 5.0.0+.
+
+### Changed
+
+- Using headless requires a deployment license always. Developer licenses are not supported.
+
 ## [1.6.0] - 2023-02-07
 ### Added
 

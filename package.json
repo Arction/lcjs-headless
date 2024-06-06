@@ -1,6 +1,6 @@
 {
-  "name": "@arction/lcjs-headless",
-  "version": "1.6.0",
+  "name": "@lightningchart/lcjs-headless",
+  "version": "2.0.0",
   "description": "Node JS support package for LightningChart JS.",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
@@ -13,10 +13,9 @@
     "raf": "^3.4.1"
   },
   "peerDependencies": {
-    "@arction/lcjs": ">= 4 < 5"
+    "@lightningchart/lcjs": ">= 5.2.0"
   },
   "devDependencies": {
-    "@arction/lcjs": "^4.1.0",
     "@types/gl": "^6.0.2",
     "@types/node": "^18.11.18",
     "typedoc": "^0.23.23",
@@ -36,7 +35,7 @@
     "type": "git",
     "url": "git@github.com:Arction/lcjs-headless.git"
   },
-  "homepage": "https://www.arction.com/lightningchart-js/",
+  "homepage": "https://www.lightningchart.com/js-charts/",
   "author": "LightningChart Ltd.",
   "license": "MIT",
   "keywords": [

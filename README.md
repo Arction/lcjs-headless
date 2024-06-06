@@ -26,7 +26,7 @@ This package uses [JSDOM][jsdom], [node-canvas][node-canvas] and [headless-gl][g
 
 ### Linux
 
-Only Ubuntu is currently officially supported. `@arction/lcjs-headless` most likely works on other distributions but might require extra work.
+Only Ubuntu is currently officially supported. `@lightningchart/lcjs-headless` most likely works on other distributions but might require extra work.
 
 #### Ubuntu
 
@@ -54,45 +54,57 @@ See [headless-gl system dependencies][gl-dependencies] for more details.
 
 ## Getting Started
 
-Install both `@arction/lcjs-headless` and `@arction/lcjs` from npm.
+Install both `@lightningchart/lcjs-headless` and `@lightningchart/lcjs` from npm.
 
-`npm install @arction/lcjs-headless @arction/lcjs`
+`npm install @lightningchart/lcjs-headless @lightningchart/lcjs`
 
-When creating a new chart make sure to import the `lightningChart()` function from `@arction/lcjs-headless` instead of `@arction/lcjs`. Other LightningChart JS related imports can be imported from `@arction/lcjs`.
+When creating a new chart make sure to import the `lightningChart()` function from `@lightningchart/lcjs-headless` instead of `@lightningchart/lcjs`. Other LightningChart JS related imports can be imported from `@lightningchart/lcjs`.
 
 To render a chart to a buffer, call `chart.engine.renderFrame(width, height)`. This function will provide you a buffer containing a single image.
 
 ```js
-import { lightningChart } from '@arction/lcjs-headless'
+import { lightningChart } from "@lightningchart/lcjs-headless";
 
-const lc = lightningChart()
-const chart = lc.ChartXY()
+const lc = lightningChart({
+  license: "my-deployment-license-key",
+  licenseInformation: "my-deployment-license-information",
+});
+const chart = lc.ChartXY();
 
-chart.engine.renderFrame(1280, 720)
+chart.engine.renderFrame(1280, 720);
 ```
 
-The `@arction/lcjs-headless` package provides a couple of helper functions to make the use of LightningChart JS in Node JS environment easier. You can render an image directly to a `sharp` or `pngjs` objects with `renderToSharp` and `renderToPNG` helper functions.
+The `@lightningchart/lcjs-headless` package provides a couple of helper functions to make the use of LightningChart JS in Node JS environment easier. You can render an image directly to a `sharp` or `pngjs` objects with `renderToSharp` and `renderToPNG` helper functions.
 
 ```js
-import { lightningChart, renderToSharp } from '@arction/lcjs-headless'
+import { lightningChart, renderToSharp } from "@lightningchart/lcjs-headless";
 
-const lc = lightningChart()
-const chart = lc.ChartXY()
+const lc = lightningChart({
+  license: "my-deployment-license-key",
+  licenseInformation: "my-deployment-license-information",
+});
+const chart = lc.ChartXY();
 
-renderToSharp(chart, 1920, 1080).toFile('out.png')
+renderToSharp(chart, 1920, 1080).toFile("out.png");
 ```
 
 ```js
-const fs = require('fs')
-const { PNG } = require('pngjs')
-const { lightningChart, renderToPNG } = require('@arction/lcjs-headless')
+const fs = require("fs");
+const { PNG } = require("pngjs");
+const {
+  lightningChart,
+  renderToPNG,
+} = require("@lightningchart/lcjs-headless");
 
-const lc = lightningChart()
-const chart = lc.ChartXY()
+const lc = lightningChart({
+  license: "my-deployment-license-key",
+  licenseInformation: "my-deployment-license-information",
+});
+const chart = lc.ChartXY();
 
-const chartOutput = renderToPNG(chart, 1920, 1080)
-const outputBuff = PNG.sync.write(chartOutput)
-fs.writeFileSync('./chartOutput.png', outputBuff)
+const chartOutput = renderToPNG(chart, 1920, 1080);
+const outputBuff = PNG.sync.write(chartOutput);
+fs.writeFileSync("./chartOutput.png", outputBuff);
 ```
 
 ### Local Resources
@@ -101,8 +113,17 @@ When using Map Chart with in Node JS you need to provide the path to the LCJS re
 
 ```js
 const lcjs = lightningChart({
-    resourcesBaseUrl: `fs:${path.resolve(__dirname, 'node_modules', '@arction', 'lcjs', 'dist', 'resources')}`
-})
+  license: "my-deployment-license-key",
+  licenseInformation: "my-deployment-license-information",
+  resourcesBaseUrl: `fs:${path.resolve(
+    __dirname,
+    "node_modules",
+    "@lightningchart",
+    "lcjs",
+    "dist",
+    "resources"
+  )}`,
+});
 ```
 
 ### Headless in Linux machine
@@ -126,13 +147,16 @@ There is a few helper methods available that are exported by this package.
 - Prepares the frame to a "sharp" object, which allows the use of `sharp` to manipulate the image further or export it to a many different image formats.
 
 ```js
-import { lightningChart, renderToSharp } from '@arction/lcjs-headless'
+import { lightningChart, renderToSharp } from "@lightningchart/lcjs-headless";
 
-const lc = lightningChart()
+const lc = lightningChart({
+  license: "my-deployment-license-key",
+  licenseInformation: "my-deployment-license-information",
+});
 
-const chart = lc.ChartXY()
+const chart = lc.ChartXY();
 
-renderToSharp(chart, 1920, 1080).toFile('out.png')
+renderToSharp(chart, 1920, 1080).toFile("out.png");
 ```
 
 > Note: There is a known issue with using `sharp` on Windows. https://sharp.pixelplumbing.com/install#canvas-and-windows
@@ -144,11 +168,11 @@ renderToSharp(chart, 1920, 1080).toFile('out.png')
 - Prepares the frame to a PNG image which can then be written to disk.
 
 ```js
-const fs = require('fs')
-const { PNG } = require('pngjs')
-const chartOutput = renderToPNG(chart, 1920, 1080)
-const outputBuff = PNG.sync.write(chartOutput)
-fs.writeFileSync('./chartOutput.png', outputBuff)
+const fs = require("fs");
+const { PNG } = require("pngjs");
+const chartOutput = renderToPNG(chart, 1920, 1080);
+const outputBuff = PNG.sync.write(chartOutput);
+fs.writeFileSync("./chartOutput.png", outputBuff);
 ```
 
 ### `renderToBase64`
@@ -177,15 +201,18 @@ If the font is not a system font, then it needs to be registered before it can b
 This function is re-exported by this package from the `node-canvas` package.
 
 ```js
-import { lightningChart, registerFont } from '@arction/lcjs-headless'
+import { lightningChart, registerFont } from "@lightningchart/lcjs-headless";
 // Register Open Sans font from a font file
-registerFont('OpenSans-Regular.ttf', { family: 'Open Sans' })
+registerFont("OpenSans-Regular.ttf", { family: "Open Sans" });
 
 // Create a chart
-const lc = lightningChart()
-const chart = lc.ChartXY()
+const lc = lightningChart({
+  license: "my-deployment-license-key",
+  licenseInformation: "my-deployment-license-information",
+});
+const chart = lc.ChartXY();
 // Use the registered font
-chart.setTitleFont((f) => f.setFamily('Open Sans'))
+chart.setTitleFont((f) => f.setFamily("Open Sans"));
 ```
 
 ## Anti-aliasing
@@ -195,15 +222,18 @@ Anti-aliasing that is normally available in browsers is not available when using
 The `devicePixelRatio` option when creating a chart can be used to render the chart with higher resolution while scaling all elements so that when the image is downsampled to the target resolution it's displayed correctly but with the benefits of using higher resolution. Rendering at higher resolution is more work so the rendering is slower.
 
 ```js
-import { lightningChart, renderToSharp } from '@arction/lcjs-headless'
+import { lightningChart, renderToSharp } from "@lightningchart/lcjs-headless";
 
 // Create a chart
-const lc = lightningChart()
+const lc = lightningChart({
+  license: "my-deployment-license-key",
+  licenseInformation: "my-deployment-license-information",
+});
 // Create the chart with a devicePixelRatio 3 to render at higher resolution for downsampling
-const chart = lc.ChartXY({ devicePixelRatio: 3 })
+const chart = lc.ChartXY({ devicePixelRatio: 3 });
 // render the chart to a sharp object
 // the renderToSharp has built in support for downsampling by providing the pixelRatio as the fourth parameter
-renderToSharp(chart, 1920, 1080, false, 3).toFile('out.png')
+renderToSharp(chart, 1920, 1080, false, 3).toFile("out.png");
 ```
 
 Only the `renderToSharp` helper has a built in scaling to downsample the image.
@@ -219,7 +249,7 @@ Make sure to install `fontconfig` package.
 
 If the font is not a system font, you will need to register the font file with `registerFont` function.
 
-[lcjs]: https://www.arction.com/lightningchart-js/
+[lcjs]: https://www.lightningchart.com/js-charts/
 [gl]: https://github.com/stackgl/headless-gl
 [jsdom]: https://github.com/jsdom/jsdom
 [node-canvas]: https://github.com/Automattic/node-canvas
