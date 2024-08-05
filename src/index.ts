@@ -118,7 +118,7 @@ const monkeyPatchLightningChartInterfaceFunction = (func) => {
 // lcjs package will take this reference to use window APIs
 (global as any)._lcjs = dom.window
 
-import { lightningChart as originalLc, LightningChart } from '@arction/lcjs'
+import { lightningChart as originalLc, LightningChart } from '@lightningchart/lcjs'
 
 // delete the window reference from global context as lcjs has taken a reference to it now.
 delete (global as any)._lcjs
@@ -132,7 +132,8 @@ const lightningChart: typeof originalLc = function () {
     }
     // insert default arguments
     args[0] = Object.assign({}, {
-        resourcesBaseUrl: `fs:${path.resolve(process.cwd(), 'resources')}`
+        webgl: { version: "webgl1" },
+      resourcesBaseUrl: `fs:${path.resolve(process.cwd(), 'resources')}`
     }, args[0])
     // call the original lightningChart function to get the entry points
     const lc = originalLc.apply(null, args)

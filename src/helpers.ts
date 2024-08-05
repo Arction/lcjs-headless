@@ -1,4 +1,4 @@
-import { Control } from "@arction/lcjs"
+import { Control } from "@lightningchart/lcjs"
 import { Sharp } from 'sharp'
 import { PNG } from 'pngjs'
 let sharp
