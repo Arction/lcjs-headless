@@ -1,6 +1,5 @@
 {
   "name": "test",
-  "type": "module",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -11,7 +10,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@lightningchart/lcjs-headless": "file:../lightningchart-lcjs-headless-2.0.0.tgz",
+    "@lightningchart/lcjs-headless": "^2.0.0",
     "@lightningchart/lcjs-themes": "^4.0.2",
     "express": "^4.19.2",
     "pngjs": "^7.0.0"
